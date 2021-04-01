@@ -53,8 +53,41 @@ beforeEach (() => {
 
 
 
-describe('if there are words guessed' , () => { 
+describe('if there are words guessed' , () => {
+
+    const guessedWords = [
+        { guessedWord: 'train', letterMatchCount: 3 },
+        { guessedWord: 'party', letterMatchCount: 1 },
+        { guessedWord: 'agile', letterMatchCount: 5 }
+
     
+    ]
+
+    let wrapper;
+    beforeEach (() => { 
+        wrapper=setUp(({guessedWords}))
+    
+    })
+
+
+    it('render without error' , () => { 
+        const component = findByTestAtrr(wrapper, 'guessed-words')
+        expect(component.length).toBe(1)
+
+    })
+  it('render guessed words section ' , () => { 
+        const guessedWordsDiv = findByTestAtrr(wrapper, 'guessedWordsDiv')
+        expect(guessedWordsDiv.length).toBe(1)
+
+    })
+
+    it('render correct number letters  section ' , () => { 
+        const guessedWordsDiv = findByTestAtrr(wrapper, 'guessed-word')
+        expect(guessedWordsDiv.length).toBe(guessedWords.length)
+
+    })
+
+
 
 
 })
