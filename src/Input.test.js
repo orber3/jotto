@@ -13,8 +13,8 @@ jest.mock('react', () => ( {
 
 
 
-const setUp =(secretWord='party') => { 
- return shallow(<Input secretWord={secretWord} />)
+const setUp =(success=false ,secretWord='party' ) => { 
+ return shallow(<Input secretWord={secretWord} success={success} />)
 
 }
 
@@ -32,11 +32,6 @@ React.useState= originalUseState
 })
 
 
-    it('render without error' , () => { 
-        const component = findByTestAtrr(wrapper, 'input-comp')
-        expect(component.length).toBe(1)
-
-    })
 
     it('check input props types' , () => { 
         checkProps(Input , {secretWord: 'party'} )
@@ -73,5 +68,51 @@ it('input box is cleared on submit button' , () => {
 })
 
 
+describe('render success\false ' , () => { 
+
+    describe('success is true', () => { 
+        beforeEach (() => { 
+            wrapper=setUp(true)
+    
+        })
+        it('render without error' , () => { 
+            const component = findByTestAtrr(wrapper, 'input-comp')
+            expect(component.length).toBe(1)
+    
+        })
+        it('no input box rendred' , () => { 
+            const inputBox = findByTestAtrr(wrapper, 'input-box');
+            expect(inputBox.exists()).toBe(false)
+
+
+        })
+        it('no submit button rendred' , () => { 
+            const submitButton = findByTestAtrr(wrapper, 'submitButton');
+            expect(submitButton.exists()).toBe(false)
+        })
+
+    })
+
+
+    describe('success is false' , () => { 
+        beforeEach (() => { 
+            wrapper=setUp(false)
+    
+        })
+        it('no input box rendred' , () => { 
+            const inputBox = findByTestAtrr(wrapper, 'input-box');
+            expect(inputBox.exists()).toBe(true)
+
+
+        })
+        it('no submit button rendred' , () => { 
+            const submitButton = findByTestAtrr(wrapper, 'submitButton');
+            expect(submitButton.exists()).toBe(true)
+        })
+
+
+
+    })
+})
 })
 
