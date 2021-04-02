@@ -1,22 +1,11 @@
-import logo from './logo.svg';
-import './App.css';
+import Congrats from './Congrats'
+import GussedWords from './GussedWords'
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+  <Congrats success={true} />
+  <GussedWords guessedWords={[{guessedWord: 'movie' , letterMatchCount: 3}]} /> 
     </div>
   );
 }
